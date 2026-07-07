@@ -1,2 +1,8 @@
 build/*
 !build/makefile
+cuguru_*_amd64/
+Cuguru.AppDir/
+
+*.deb
+*.AppImage
+*zip

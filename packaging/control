@@ -1,0 +1,5 @@
+Package: cuguru
+Version: 1.0.2
+Architecture: amd64
+Maintainer: Thillonoz <nocturnaldeathmaskdivine@proton.me>
+Description: A graphical Suguru logic puzzle game.

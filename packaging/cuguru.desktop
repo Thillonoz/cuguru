@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Cuguru
+Comment=Play Suguru in a graphical window
+Exec=/usr/bin/cuguru
+Icon=cuguru
+Terminal=false
+Type=Application
+Categories=Game;LogicGame;
