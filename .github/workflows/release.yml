@@ -1,0 +1,79 @@
+name: Build and Release
+
+# This tells GitHub to only run this script when you push a tag that starts with "v"
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed so the script can create the Release page
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          # Install Windows cross-compiler and Linux graphics headers
+          sudo apt-get install -y mingw-w64 libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libgl1-mesa-dev
+
+      - name: Download Pre-compiled Raylib (Linux & Windows)
+        run: |
+          wget https://github.com/raysan5/raylib/releases/download/5.0/raylib-5.0_linux_amd64.tar.gz
+          tar -xzf raylib-5.0_linux_amd64.tar.gz
+          
+          wget https://github.com/raysan5/raylib/releases/download/5.0/raylib-5.0_win64_mingw-w64.zip
+          unzip raylib-5.0_win64_mingw-w64.zip
+
+      - name: Compile Linux Binary
+        run: |
+          gcc -O3 main.c -o cuguru -I./raylib-5.0_linux_amd64/include -L./raylib-5.0_linux_amd64/lib -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+
+      - name: Compile Windows Executable
+        run: |
+          x86_64-w64-mingw32-gcc -O3 main.c -o cuguru.exe -I./raylib-5.0_win64_mingw-w64/include -L./raylib-5.0_win64_mingw-w64/lib -lraylib -lopengl32 -lgdi32 -lwinmm -lpthread -static -mwindows
+
+      - name: Build .deb Package
+        run: |
+          mkdir -p deb_build/DEBIAN
+          mkdir -p deb_build/usr/bin
+          mkdir -p deb_build/usr/share/applications
+          mkdir -p deb_build/usr/share/pixmaps
+          
+          cp cuguru deb_build/usr/bin/
+          cp packaging/control deb_build/DEBIAN/
+          cp packaging/cuguru.desktop deb_build/usr/share/applications/
+          cp packaging/cuguru.png deb_build/usr/share/pixmaps/
+          
+          dpkg-deb --build deb_build cuguru_linux_amd64.deb
+
+      - name: Build AppImage
+        run: |
+          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool-x86_64.AppImage
+          
+          mkdir Cuguru.AppDir
+          cp cuguru Cuguru.AppDir/
+          cp packaging/cuguru.desktop Cuguru.AppDir/
+          cp packaging/cuguru.png Cuguru.AppDir/
+          cd Cuguru.AppDir
+          ln -s cuguru AppRun
+          ln -s cuguru.png .DirIcon
+          cd ..
+          
+          ARCH=x86_64 ./appimagetool-x86_64.AppImage Cuguru.AppDir Cuguru-x86_64.AppImage
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            cuguru
+            cuguru.exe
+            cuguru_linux_amd64.deb
+            Cuguru-x86_64.AppImage
+          generate_release_notes: true
