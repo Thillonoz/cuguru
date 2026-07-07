@@ -44,13 +44,17 @@ jobs:
           mkdir -p deb_build/usr/bin
           mkdir -p deb_build/usr/share/applications
           mkdir -p deb_build/usr/share/pixmaps
-          
+              
           cp cuguru deb_build/usr/bin/
           cp packaging/control deb_build/DEBIAN/
           cp packaging/cuguru.desktop deb_build/usr/share/applications/
           cp packaging/cuguru.png deb_build/usr/share/pixmaps/
-          
-          dpkg-deb --build deb_build cuguru_linux_amd64.deb
+              
+          VERSION=${GITHUB_REF_NAME#v}
+              
+          sed -i "s/^Version:.*/Version: $VERSION/" deb_build/DEBIAN/control
+              
+          dpkg-deb --build deb_build cuguru_${VERSION}_amd64.deb
 
       - name: Build AppImage
         run: |
@@ -74,6 +78,6 @@ jobs:
           files: |
             cuguru
             cuguru.exe
-            cuguru_linux_amd64.deb
+            *.deb
             Cuguru-x86_64.AppImage
           generate_release_notes: true
