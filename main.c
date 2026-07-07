@@ -318,6 +318,23 @@ int main(void) {
                 }
             }
 
+            if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
+                if (selected_x == -1) { selected_x = 0; selected_y = ROWS - 1; }
+                else if (selected_y > 0) selected_y--;
+            }
+            if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
+                if (selected_x == -1) { selected_x = 0; selected_y = 0; }
+                else if (selected_y < ROWS - 1) selected_y++;
+            }
+            if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
+                if (selected_x == -1) { selected_x = COLS - 1; selected_y = 0; }
+                else if (selected_x > 0) selected_x--;
+            }
+            if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
+                if (selected_x == -1) { selected_x = 0; selected_y = 0; }
+                else if (selected_x < COLS - 1) selected_x++;
+            }
+
             if (selected_x != -1 && selected_y != -1 && !grid[selected_x][selected_y].is_given) {
                 int key = GetKeyPressed();
                 if (key >= KEY_ONE && key <= KEY_FIVE) {
