@@ -4,7 +4,7 @@
 #include <string.h>
 #include <pthread.h>     
 #include <stdatomic.h>   
-#include <math.h>
+#include <math.h>        
 #include "boards.h"      
 
 #define CELL_SIZE 80
@@ -243,6 +243,8 @@ bool DrawButton(Rectangle rect, const char* text, Color baseColor, bool isSelect
 }
 
 int main(void) {
+    InitializeLayouts();
+    
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Cuguru");
     SetTargetFPS(60);
 
@@ -282,7 +284,7 @@ int main(void) {
         bool is_game_won = CheckWinCondition(grid);
 
         if (hint_timer > 0.0f) {
-            hint_timer -= GetFrameTime();
+            hint_timer -= GetFrameTime(); 
             if (hint_timer <= 0.0f) {
                 hint_blink_x = -1;
                 hint_blink_y = -1;
@@ -400,7 +402,7 @@ int main(void) {
             if (DrawButton(btnReset, "Reset Grid", LIGHTGRAY, false)) {
                 memcpy(grid, initial_grid, sizeof(grid)); 
                 selected_x = -1; selected_y = -1;
-                hint_timer = 0.0f; // Reset animation if they click reset
+                hint_timer = 0.0f; 
             }
 
             if (!is_game_won) {
