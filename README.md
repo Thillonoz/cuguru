@@ -23,7 +23,7 @@ Suguru (sometimes called Tectonic) is a number placement puzzle with three simpl
 
 ## 🛠️ Build & Run
 
-This project uses `make` to manage the build process. 
+This project uses `make` to manage the build process. **Make sure to run the make commands inside the build folder!**
 
 | Command | Description |
 |---|---|
