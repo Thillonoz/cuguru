@@ -1,6 +1,5 @@
 name: Build and Release
 
-# This tells GitHub to only run this script when you push a tag that starts with "v"
 on:
   push:
     tags:
@@ -8,9 +7,9 @@ on:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     permissions:
-      contents: write # Needed so the script can create the Release page
+      contents: write
 
     steps:
       - name: Checkout Source Code
