@@ -14,6 +14,7 @@ Suguru (sometimes called Tectonic) is a number placement puzzle with three simpl
 
 | Action | Key |
 |---|---|
+| **Move Cursor** | `W` `A` `S` `D` (or Arrow Keys) |
 | **Enter Number** | `1` - `9` |
 | **Clear Cell** | `Backspace` |
 | **Quit Game** | `Esc` |
@@ -33,6 +34,6 @@ This project uses `make` to manage the build process.
 
 ## ☕ Support
 
-If you enjoy playing Cuguru or found the code helpful, consider supporting the project!
+If you enjoy playing Cuguru or found the code helpful, consider starring the project or supporting me over at Buy Me a Coffee!
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/thillonoz)
