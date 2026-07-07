@@ -6,3 +6,5 @@ Cuguru.AppDir/
 *.deb
 *.AppImage
 *zip
+
+todo*
