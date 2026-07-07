@@ -368,7 +368,7 @@ int main(void) {
                 DrawRectangleRec(cellRect, bgColor);
 
                 if (grid[x][y].value > 0 && !is_generating) {
-                    char numStr[2];
+                    char numStr[16];
                     sprintf(numStr, "%d", grid[x][y].value);
                     
                     bool isValid = IsMoveValid(grid, x, y, grid[x][y].value);
