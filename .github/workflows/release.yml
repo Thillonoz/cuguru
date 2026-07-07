@@ -32,7 +32,7 @@ jobs:
 
       - name: Compile Linux Binary
         run: |
-          gcc -O3 main.c -o cuguru -I./raylib-5.0_linux_amd64/include -L./raylib-5.0_linux_amd64/lib -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+          gcc -O3 main.c -o cuguru -I./raylib-5.0_linux_amd64/include ./raylib-5.0_linux_amd64/lib/libraylib.a -lGL -lm -lpthread -ldl -lrt -lX11
 
       - name: Compile Windows Executable
         run: |
