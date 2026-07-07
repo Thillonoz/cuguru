@@ -2,6 +2,16 @@
 
 A [Suguru](https://en.wikipedia.org/wiki/Suguru_(puzzle)) logic puzzle game developed entirely in C. 
 
+## 📥 Download & Play
+
+You don't need to compile the game to play it! Head over to the **[Releases page](../../releases/latest)** to download the latest version for your system:
+
+*   **🪟 Windows:** Download the `.exe` file and double-click to play instantly.
+*   **🐧 Linux (.deb):** Download the `.deb` file and install it (e.g., `sudo apt install ./cuguru_*.deb`) to add it to your application launcher.
+*   **🐧 Linux (AppImage):** Download the `.AppImage`, make it executable (`chmod +x`), and run it on almost any Linux distribution without installing.
+
+---
+
 ## 🧠 How to Play
 
 ### The Rules of Suguru
@@ -15,13 +25,16 @@ Suguru (sometimes called Tectonic) is a number placement puzzle with three simpl
 | Action | Key |
 |---|---|
 | **Move Cursor** | `W` `A` `S` `D` (or Arrow Keys) |
-| **Enter Number** | `1` - `9` |
-| **Clear Cell** | `Backspace` |
+| **Enter Number** | `1` - `9` or numpad |
+| **Hint** | `H` |
+| **Reset** | `R` |
+| **New Puzzle** | `N` |
+| **Clear Cell** | `Backspace`, `Delete` or the same number that's in the cell |
 | **Quit Game** | `Esc` |
 
 ---
 
-## 🛠️ Build & Run
+## 🛠️ Build & Run (For Developers)
 
 This project uses `make` to manage the build process. **Make sure to run the make commands inside the build folder!**
 
